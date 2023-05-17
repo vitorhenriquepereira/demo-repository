@@ -1,7 +1,14 @@
 import { useState } from 'react';
+import { useEffect } from 'react'
 
 export default function Home() {
   const [color, setColor] = useState('green');
+
+  useEffect(() => {
+    if(color === '#dc3545') {
+      alert('Comunista');
+    }
+  }, [color]);
 
   return (
     <div>
