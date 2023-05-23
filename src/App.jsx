@@ -11,21 +11,15 @@ function App() {
             to="/"
             className="d-flex align-items-center link-body-emphasis text-decoration-none"
           >
-            <span className="fs-4">Master Demo</span>
+            <span className="fs-4">Lista de Compras 🛒🥕🥔🍅</span>
           </Link>
 
           <nav className="d-inline-flex mt-2 mt-md-0 ms-auto">
-            <Link
+          <Link
               className="me-3 py-2 link-body-emphasis text-decoration-none"
               to="/"
             >
               Home
-            </Link>
-            <Link
-              className="me-3 py-2 link-body-emphasis text-decoration-none"
-              to="/cadastro"
-            >
-              Cadastro
             </Link>
           </nav>
         </div>

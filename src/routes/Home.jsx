@@ -1,89 +1,73 @@
 import { useState } from 'react';
-import { useEffect } from 'react'
+import List from '../componentes/List';
 
 export default function Home() {
-  const [color, setColor] = useState('green');
+  const [formData, setFormData] = useState({
+    produto: '',
+    quantidade: '1',
+    unidadeMedida: 'Kg',
+    status: false,
+  });
 
-  useEffect(() => {
-    if(color === '#dc3545') {
-      alert('Comunista');
-    }
-  }, [color]);
+  const [compra, setCompra] = useState([]);
 
   return (
-    <div>
-      <div
-        style={{
-          padding: 12,
-          marginBottom: 21,
-          backgroundColor: color,
-          color: 'white',
+    <>
+      <form
+        action="#"
+        method="post"
+        onSubmit={(event) => {
+          event.preventDefault();
+          setCompra([...compra, formData]);
         }}
       >
-        <p>Teste de Elemento colorido - {color}</p>
-      </div>
-
-      <div
-        class="d-flex gap-2"
-        style={{ padding: 9, flexWrap: 'wrap', backgroundColor: '#dfdfdf' }}
-      >
-        <button
-          onClick={() => setColor('#0d6efd')}
-          type="button"
-          className="btn btn-primary"
-        >
-          Primary
-        </button>
-        <button
-          onClick={() => setColor('#6c757d')}
-          type="button"
-          className="btn btn-secondary"
-        >
-          Secondary
-        </button>
-        <button
-          onClick={() => setColor('#198754')}
-          type="button"
-          className="btn btn-success"
-        >
-          Success
-        </button>
-        <button
-          onClick={() => setColor('#dc3545')}
-          type="button"
-          className="btn btn-danger"
-        >
-          Danger
-        </button>
-        <button
-          onClick={() => setColor('#ffc107')}
-          type="button"
-          className="btn btn-warning"
-        >
-          Warning
-        </button>
-        <button
-          onClick={() => setColor('#0dcaf0')}
-          type="button"
-          className="btn btn-info"
-        >
-          Info
-        </button>
-        <button
-          onClick={() => setColor('#AFAFAF')}
-          type="button"
-          className="btn btn-light"
-        >
-          Light
-        </button>
-        <button
-          onClick={() => setColor('#212529')}
-          type="button"
-          className="btn btn-dark"
-        >
-          Dark
-        </button>
-      </div>
-    </div>
+        <fieldset>
+          <div className="form-group mb-3">
+            <label htmlFor="produto">Informe um item para a lista:</label>
+            <input
+              type="text"
+              className="form-control"
+              id="produto"
+              placeholder="Produto"
+              value={formData.produto}
+              onChange={(event) => setFormData({ ...formData, produto: event.target.value })} />
+          </div>
+          <div className="form-group mb-3">
+            <label htmlFor="quantidade">Quantidade do item a ser comprado:</label>
+            <input
+              type="text"
+              className="form-control"
+              id="quantidade"
+              placeholder="Quantidade"
+              value={formData.quantidade}
+              onChange={(event) => setFormData({ ...formData, quantidade: event.target.value })} />
+          </div>
+          <div className="form-group mb-3">
+            <label htmlFor="unidadeMedida">Unidade de medida do item:</label>
+            <input
+              type="text"
+              className="form-control"
+              id="unidadeMedida"
+              placeholder="Unidade de Medida"
+              value={formData.unidadeMedida}
+              onChange={(event) => setFormData({ ...formData, unidadeMedida: event.target.value })} />
+          </div>
+          <button type="submit" className="btn btn-primary">
+            Adicionar Item
+          </button>
+        </fieldset>
+      </form>
+      <br />
+      <ul>{compra.map((compras) => (
+        <List
+          key={compras.produto}
+          produto={compras.produto}
+          quantidade={compras.quantidade}
+          unidadeMedida={compras.unidadeMedida}
+          status={compras.status}
+        />
+      ))}
+      </ul>
+    </>
   );
 }
